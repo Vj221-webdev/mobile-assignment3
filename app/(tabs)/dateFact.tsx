@@ -1,6 +1,7 @@
-
+// remember to run `npm install @react-native-picker/picker` if you haven't already
+import { Picker } from '@react-native-picker/picker';
 import { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default function DateFactScreen() {
   const [month, setMonth] = useState('');
@@ -39,17 +40,38 @@ export default function DateFactScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Enter a Date</Text>
-      <TextInput
+      <Picker
+        selectedValue={month}
+        style={styles.input}
+        onValueChange={(itemValue) => setMonth(itemValue)}
+      >
+        <Picker.Item label="Select Month" value="" />
+        <Picker.Item label="January" value="1" />
+        <Picker.Item label="February" value="2" />
+        <Picker.Item label="March" value="3" />
+        <Picker.Item label="April" value="4" />
+        <Picker.Item label="May" value="5" />
+        <Picker.Item label="June" value="6" />
+        <Picker.Item label="July" value="7" />
+        <Picker.Item label="August" value="8" />
+        <Picker.Item label="September" value="9" />
+        <Picker.Item label="October" value="10" />
+        <Picker.Item label="November" value="11" />
+        <Picker.Item label="December" value="12" />
+      </Picker>
+      {/* <TextInput
         style={styles.input}
         placeholder="Month (1-12)"
+        //it's so weird but in the assignment text it shows the default keyboard. if questions asked, change to 'default'
         keyboardType="numeric"
         value={month}
         onChangeText={setMonth}
         maxLength={2}
-      />
+      /> */}
       <TextInput
         style={styles.input}
         placeholder="Day (1-31)"
+        //it's so weird but in the assignment text it shows the default keyboard. if questions asked, change to 'default'
         keyboardType="numeric"
         value={day}
         onChangeText={setDay}
