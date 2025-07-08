@@ -25,17 +25,23 @@ export default function DateFactScreen() {
       }
     };
 
-    if (
-      Number(month) >= 1 &&
-      Number(month) <= 12 &&
-      Number(day) >= 1 &&
-      Number(day) <= 31
-    ) {
-      fetchFact();
-    } else {
-      setFact('');
-    }
-  }, [month, day]);
+    const isValidDate = (month: number, day: number): boolean => {
+    const daysInMonth = [31, 29, 31, 30, 31, 30,
+                         31, 31, 30, 31, 30, 31]; // Feb allows up to 29
+
+    if (month < 1 || month > 12) return false;
+    return day >= 1 && day <= daysInMonth[month - 1];
+  };
+
+  const m = Number(month);
+  const d = Number(day);
+
+  if (isValidDate(m, d)) {
+    fetchFact();
+  } else {
+    setFact('');
+  }
+}, [month, day]);
 
   return (
     <View style={styles.container}>
